@@ -1,0 +1,14 @@
+services:
+  app:
+    image: ghcr.io/felipeelias/hook-lab:latest
+    ports:
+      - "4000:4000"
+    volumes:
+      - hook_lab_data:/app/data
+    environment:
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      DATABASE_PATH: /app/data/hook_lab.db
+      PHX_HOST: localhost
+
+volumes:
+  hook_lab_data:

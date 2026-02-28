@@ -8,16 +8,26 @@ A web dashboard for watching Claude Code hook events in real time.
 
 ## Quickstart
 
+```yaml
+services:
+  app:
+    image: ghcr.io/felipeelias/hook-lab:latest
+    ports:
+      - "4000:4000"
+    volumes:
+      - hook_lab_data:/app/data
+    environment:
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      DATABASE_PATH: /app/data/hook_lab.db
+      PHX_HOST: localhost
+
+volumes:
+  hook_lab_data:
+```
+
 ```bash
 export SECRET_KEY_BASE=$(openssl rand -base64 64)
-
-docker run -d \
-  -p 4000:4000 \
-  -v hook_lab_data:/app/data \
-  -e SECRET_KEY_BASE \
-  -e DATABASE_PATH=/app/data/hook_lab.db \
-  -e PHX_HOST=localhost \
-  ghcr.io/felipeelias/hook-lab:latest
+docker compose up -d
 ```
 
 Open http://localhost:4000.
