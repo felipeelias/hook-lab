@@ -2,6 +2,10 @@
 
 A web dashboard for watching Claude Code hook events in real time.
 
+![HookLab dashboard](assets/hook-lab.gif)
+
+![Expanded hook event](assets/hook-lab-expanded.png)
+
 ## Quickstart
 
 ```bash
