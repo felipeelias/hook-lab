@@ -3,8 +3,19 @@
   <div class="navbar bg-base-100 shadow-sm border-b border-base-300">
     <div class="navbar-start">
       <label for="filter-drawer" class="btn btn-ghost btn-square lg:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="size-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h8m-8 6h16"
+          />
         </svg>
       </label>
       <span class="btn btn-ghost text-xl font-mono tracking-tight">hook-lab</span>
@@ -44,15 +55,31 @@
               class="grid grid-cols-[7rem_9rem_7rem_5rem_1fr_1.5rem] gap-2 w-full text-left items-center px-3 py-2.5 text-sm cursor-pointer hover:bg-base-200/50 transition-colors"
               phx-click={toggle_detail(dom_id)}
             >
-              <span class="font-mono text-xs text-base-content/50">{format_timestamp(log.inserted_at)}</span>
+              <span class="font-mono text-xs text-base-content/50">
+                {format_timestamp(log.inserted_at)}
+              </span>
               <span>
-                <span class={"badge badge-soft badge-sm font-mono #{event_badge_class(log.hook_event_name)}"}>{log.hook_event_name}</span>
+                <span class={"badge badge-soft badge-sm font-mono #{event_badge_class(log.hook_event_name)}"}>
+                  {log.hook_event_name}
+                </span>
               </span>
               <span class="font-mono text-xs truncate">{log.tool_name || ""}</span>
-              <span class="font-mono text-xs text-base-content/50 truncate" title={log.session_id}>{truncate(log.session_id, 8)}</span>
+              <span class="font-mono text-xs text-base-content/50 truncate" title={log.session_id}>
+                {truncate(log.session_id, 8)}
+              </span>
               <span class="font-mono text-xs text-base-content/40 truncate">{log.cwd || ""}</span>
-              <svg id={"#{dom_id}-chevron"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 text-base-content/30 transition-transform">
-                <path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+              <svg
+                id={"#{dom_id}-chevron"}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                class="size-4 text-base-content/30 transition-transform"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+                  clip-rule="evenodd"
+                />
               </svg>
             </button>
 
@@ -71,8 +98,17 @@
       <label for="filter-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
       <div class="bg-base-200 min-h-full w-64 p-4 flex flex-col gap-4">
         <div class="font-semibold text-sm flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-4">
-            <path fill-rule="evenodd" d="M2.628 1.601C5.028 1.206 7.49 1 10 1s4.973.206 7.372.601a.75.75 0 0 1 .628.74v2.288a2.25 2.25 0 0 1-.659 1.59l-4.682 4.683a2.25 2.25 0 0 0-.659 1.59v3.037c0 .684-.31 1.33-.844 1.757l-1.937 1.55A.75.75 0 0 1 8 18.25v-5.757a2.25 2.25 0 0 0-.659-1.591L2.659 6.22A2.25 2.25 0 0 1 2 4.629V2.34a.75.75 0 0 1 .628-.74Z" clip-rule="evenodd" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="size-4"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2.628 1.601C5.028 1.206 7.49 1 10 1s4.973.206 7.372.601a.75.75 0 0 1 .628.74v2.288a2.25 2.25 0 0 1-.659 1.59l-4.682 4.683a2.25 2.25 0 0 0-.659 1.59v3.037c0 .684-.31 1.33-.844 1.757l-1.937 1.55A.75.75 0 0 1 8 18.25v-5.757a2.25 2.25 0 0 0-.659-1.591L2.659 6.22A2.25 2.25 0 0 1 2 4.629V2.34a.75.75 0 0 1 .628-.74Z"
+              clip-rule="evenodd"
+            />
           </svg>
           Filters
         </div>
@@ -83,7 +119,10 @@
             <select name="hook_event_name" class="select select-sm w-full">
               <option value="">All</option>
               <option
-                :for={event <- ~w(PreToolUse PostToolUse SessionStart SessionEnd Stop UserPromptSubmit Notification SubagentStart SubagentStop)}
+                :for={
+                  event <-
+                    ~w(PreToolUse PostToolUse SessionStart SessionEnd Stop UserPromptSubmit Notification SubagentStart SubagentStop)
+                }
                 value={event}
                 selected={@filters["hook_event_name"] == event}
               >

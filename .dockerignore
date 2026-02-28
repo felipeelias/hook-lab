@@ -1,0 +1,10 @@
+*
+!mix.exs
+!mix.lock
+!config/
+!lib/
+!priv/
+!assets/
+!rel/
+priv/static/assets/
+priv/static/cache_manifest.json
