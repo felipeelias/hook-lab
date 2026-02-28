@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: felipeelias/hook-lab
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build-and-push:

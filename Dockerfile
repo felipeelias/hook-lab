@@ -92,6 +92,9 @@ COPY --link --from=builder --chown=65534:0 /app/_build/${MIX_ENV}/rel/hook_lab .
 # Create data directory for SQLite
 RUN mkdir -p /app/data && chown nobody /app/data
 
+LABEL org.opencontainers.image.source="https://github.com/felipeelias/hook-lab" \
+      org.opencontainers.image.description="A web dashboard for watching Claude Code hook events in real time"
+
 USER nobody
 
 CMD ["/app/bin/server"]
