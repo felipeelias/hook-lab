@@ -1,0 +1,17 @@
+.envrc
+*.db
+*.db-*
+*.ez
+/_build/
+/.fetch
+/assets/node_modules/
+/cover/
+/deps/
+/doc/
+/priv/static/assets/
+/priv/static/cache_manifest.json
+/tmp/
+hook_lab-*.tar
+erl_crash.dump
+npm-debug.log
+.claude/

@@ -1,0 +1,2 @@
+[allowlist]
+paths = ["config/dev.exs", "config/test.exs"]
