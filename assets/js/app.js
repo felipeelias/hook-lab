@@ -23,7 +23,7 @@ import "phoenix_html"
 import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import {hooks as colocatedHooks} from "phoenix-colocated/hook_lab"
-import topbar from "../vendor/topbar"
+import topbar from "topbar"
 import Alpine from "alpinejs"
 
 window.Alpine = Alpine

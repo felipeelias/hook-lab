@@ -19,10 +19,15 @@ ARG DEBIAN_VERSION=bookworm-20260202-slim
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
 ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
 
+FROM node:24-bookworm-slim AS node
+
 FROM ${BUILDER_IMAGE} AS builder
 
 # install build dependencies
-RUN apt-get update -y && \
+COPY --from=node /usr/local/bin/node /usr/local/bin/node
+COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
+RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm && \
+    apt-get update -y && \
     apt-get install -y --no-install-recommends build-essential git && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -51,6 +56,9 @@ RUN mix deps.compile
 COPY priv priv
 COPY lib lib
 COPY assets assets
+
+# install npm dependencies for esbuild
+RUN npm install --prefix assets
 
 # Compile the app (generates colocated hooks for esbuild)
 RUN mix compile
