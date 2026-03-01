@@ -11,7 +11,11 @@ defmodule HookLab.MixProject do
       aliases: aliases(),
       deps: deps(),
       compilers: [:phoenix_live_view] ++ Mix.compilers(),
-      listeners: [Phoenix.CodeReloader]
+      listeners: [Phoenix.CodeReloader],
+      test_coverage: [
+        summary: [threshold: 95],
+        ignore_modules: [HookLab.Release, HookLab.Repo]
+      ]
     ]
   end
 
@@ -58,7 +62,9 @@ defmodule HookLab.MixProject do
        compile: false,
        depth: 1},
       {:jason, "~> 1.2"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:sobelow, "~> 0.13", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -81,13 +87,21 @@ defmodule HookLab.MixProject do
         "esbuild hook_lab --minify",
         "phx.digest"
       ],
-      precommit: ["compile --warnings-as-errors", "deps.unlock --unused", "format", "test"],
+      precommit: [
+        "compile --warnings-as-errors",
+        "deps.unlock --unused",
+        "format",
+        "credo",
+        "test"
+      ],
       ci: [
         "hex.audit",
         "compile --warnings-as-errors",
         "format --check-formatted",
         "deps.unlock --check-unused",
-        "test"
+        "credo --strict",
+        "sobelow --config",
+        "test --cover"
       ]
     ]
   end
