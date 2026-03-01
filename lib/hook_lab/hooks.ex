@@ -1,8 +1,10 @@
 defmodule HookLab.Hooks do
+  @moduledoc false
+
   import Ecto.Query
 
-  alias HookLab.Repo
   alias HookLab.Hooks.HookLog
+  alias HookLab.Repo
 
   def create_hook_log(attrs) do
     result =

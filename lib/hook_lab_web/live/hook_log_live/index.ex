@@ -5,6 +5,18 @@ defmodule HookLabWeb.HookLogLive.Index do
 
   @filter_keys ~w(hook_event_name tool_name session_id cwd permission_mode model)
 
+  @event_badge_classes %{
+    "PreToolUse" => "badge-warning",
+    "PostToolUse" => "badge-success",
+    "SessionStart" => "badge-info",
+    "SessionEnd" => "badge-neutral",
+    "Stop" => "badge-error",
+    "UserPromptSubmit" => "badge-primary",
+    "Notification" => "badge-accent",
+    "SubagentStart" => "badge-secondary",
+    "SubagentStop" => "badge-secondary"
+  }
+
   defp toggle_detail(dom_id) do
     JS.toggle(to: "##{dom_id}-detail")
     |> JS.toggle_class("rotate-180", to: "##{dom_id}-chevron")
@@ -53,18 +65,7 @@ defmodule HookLabWeb.HookLogLive.Index do
   end
 
   defp event_badge_class(event_name) do
-    case event_name do
-      "PreToolUse" -> "badge-warning"
-      "PostToolUse" -> "badge-success"
-      "SessionStart" -> "badge-info"
-      "SessionEnd" -> "badge-neutral"
-      "Stop" -> "badge-error"
-      "UserPromptSubmit" -> "badge-primary"
-      "Notification" -> "badge-accent"
-      "SubagentStart" -> "badge-secondary"
-      "SubagentStop" -> "badge-secondary"
-      _ -> "badge-neutral"
-    end
+    Map.get(@event_badge_classes, event_name, "badge-neutral")
   end
 
   defp truncate(nil, _), do: ""

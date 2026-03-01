@@ -7,7 +7,9 @@ defmodule HookLabWeb.CoreComponentsTest do
 
   describe "flash/1" do
     test "renders info flash" do
-      html = render_component(&CoreComponents.flash/1, %{kind: :info, flash: %{"info" => "Hello"}})
+      html =
+        render_component(&CoreComponents.flash/1, %{kind: :info, flash: %{"info" => "Hello"}})
+
       assert html =~ "Hello"
       assert html =~ "alert-info"
     end

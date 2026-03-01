@@ -34,7 +34,7 @@ Open http://localhost:4000.
 
 ## Hook configuration
 
-This repo includes a [`.claude/settings.json`](.claude/settings.json) that sends every hook event to HookLab over HTTP. Each hook has a 1-second timeout. If HookLab isn't running, Claude Code moves on.
+This repo includes a [`docs/claude-settings.example.json`](docs/claude-settings.example.json) that sends every hook event to HookLab over HTTP. Each hook has a 1-second timeout. If HookLab isn't running, Claude Code moves on.
 
 Copy the `hooks` block from that file into `~/.claude/settings.json` or your project's `.claude/settings.json`. Here's a stripped-down version with just two events if you want to start small:
 
