@@ -24,12 +24,36 @@ import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import {hooks as colocatedHooks} from "phoenix-colocated/hook_lab"
 import topbar from "../vendor/topbar"
+import Alpine from "alpinejs"
+
+window.Alpine = Alpine
+
+Alpine.data("themeToggle", () => ({
+  set(theme) {
+    if (theme === "system") {
+      localStorage.removeItem("phx:theme")
+      document.documentElement.removeAttribute("data-theme")
+    } else {
+      localStorage.setItem("phx:theme", theme)
+      document.documentElement.setAttribute("data-theme", theme)
+    }
+  }
+}))
+
+Alpine.start()
 
 const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 const liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
   params: {_csrf_token: csrfToken},
   hooks: {...colocatedHooks},
+  dom: {
+    onBeforeElUpdated(from, to) {
+      if (from._x_dataStack) {
+        window.Alpine.clone(from, to)
+      }
+    }
+  },
 })
 
 // Show progress bar on live navigation and form submits

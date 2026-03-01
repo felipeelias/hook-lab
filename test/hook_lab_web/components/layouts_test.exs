@@ -6,13 +6,13 @@ defmodule HookLabWeb.LayoutsTest do
   alias HookLabWeb.Layouts
 
   describe "theme_toggle/1" do
-    test "renders three theme buttons dispatching correct theme values" do
+    test "renders alpine theme toggle with three buttons" do
       html = render_component(&Layouts.theme_toggle/1, %{})
 
-      assert html =~ "phx:set-theme"
-      assert html =~ "system"
-      assert html =~ "winter"
-      assert html =~ "dark"
+      assert html =~ ~s[x-data="themeToggle"]
+      assert html =~ ~s[x-on:click="set('system')"]
+      assert html =~ ~s[x-on:click="set('winter')"]
+      assert html =~ ~s[x-on:click="set('dark')"]
     end
   end
 
