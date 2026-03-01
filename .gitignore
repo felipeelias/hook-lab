@@ -1,7 +1,9 @@
-.envrc
 *.db
 *.db-*
 *.ez
+.claude/
+.envrc
+.playwright-mcp/
 /_build/
 /.fetch
 /assets/node_modules/
@@ -11,7 +13,6 @@
 /priv/static/assets/
 /priv/static/cache_manifest.json
 /tmp/
-hook_lab-*.tar
 erl_crash.dump
+hook_lab-*.tar
 npm-debug.log
-.claude/
