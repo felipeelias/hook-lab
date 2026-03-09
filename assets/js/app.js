@@ -32,7 +32,11 @@ Alpine.data("themeToggle", () => ({
   set(theme) {
     if (theme === "system") {
       localStorage.removeItem("phx:theme")
-      document.documentElement.removeAttribute("data-theme")
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.setAttribute("data-theme", "dark")
+      } else {
+        document.documentElement.removeAttribute("data-theme")
+      }
     } else {
       localStorage.setItem("phx:theme", theme)
       document.documentElement.setAttribute("data-theme", theme)

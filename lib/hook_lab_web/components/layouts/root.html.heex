@@ -12,8 +12,12 @@
     </script>
     <script>
       (() => {
-        const theme = localStorage.getItem("phx:theme");
-        if (theme) document.documentElement.setAttribute("data-theme", theme);
+        const saved = localStorage.getItem("phx:theme");
+        if (saved) {
+          document.documentElement.setAttribute("data-theme", saved);
+        } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
       })();
     </script>
   </head>
