@@ -69,6 +69,10 @@ Copy the `hooks` block from that file into `~/.claude/settings.json` or your pro
 
 Hook settings are read at session start, so open a new Claude Code session after changing them.
 
+### Custom URL
+
+If HookLab is running on a different host or port, replace `http://localhost:4000/api/hooks` in each hook entry with your URL. HTTP hooks don't support environment variable interpolation in the `url` field, so the URL must be edited directly in the settings file.
+
 ## Development
 
 ```bash
