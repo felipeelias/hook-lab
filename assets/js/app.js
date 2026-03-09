@@ -29,7 +29,9 @@ import Alpine from "alpinejs"
 window.Alpine = Alpine
 
 Alpine.data("themeToggle", () => ({
+  selection: localStorage.getItem("phx:theme") || "system",
   set(theme) {
+    this.selection = theme
     if (theme === "system") {
       localStorage.removeItem("phx:theme")
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
